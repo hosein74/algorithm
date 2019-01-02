@@ -20,9 +20,10 @@ var length = myArray.length;
 var height = 500;
 
 var middle = height/2
+var element = d3.select("#algorithm-box").node();
 
-var width = 1000;
-
+var width = element.getBoundingClientRect().width/3;
+var mywidth = element.getBoundingClientRect().width;
 var barWidth = width/length;
 
 var x = d3.scaleLinear()
@@ -34,9 +35,10 @@ var y = d3.scaleLinear()
     .range([0, middle -20]);
 
 var svg = d3.select("#algorithm-box").append("svg")
-    .attr("width", width )
-    .attr("height", height )
-    .append("g")
+    .attr("width", '100%' )
+    .attr("height", height ) .style('display','block')
+    .style('margin','auto')
+    .append("g").attr('transform','translate('+((mywidth-width)/2)+',0)');
 var rects = svg.append("g")
     .attr("transform", "translate(" + barWidth + ",0) ")
     .selectAll("rect")
@@ -65,6 +67,7 @@ labels.attr("id", function(d,i) {return "text" + i})
         return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle-(y(d))-1)+")"
     })
     .html(function(d) {return d;})
+
 
 function *bubble() {
     var N = myArray.length;
