@@ -1,4 +1,4 @@
-
+myArray = [5,9,3,-5,3,6,-1,4,2,4];
 var mainColor = d3.rgb("#aa8eff");
 var swapColor = d3.rgb("#ffaa55");
 var selectColor = d3.rgb("#ff6259");
@@ -20,7 +20,6 @@ var length = myArray.length;
 var height = 500;
 
 var middle = height/2
-
 
 var element = d3.select("#algorithm-box").node();
 
@@ -71,24 +70,80 @@ labels.attr("id", function(d,i) {return "text" + i})
     .html(function(d) {return d;})
 
 
-function *insertion() {
-    var N = myArray.length;
-    var D = myArray;
-    for (var i = 1; i < N; i++) {
-        var key = D[i];
-        select(i,selectColor);
-        yield i;
-        var j;
-        for (j = i - 1; (j >= 0) && (D[j] > key); j--) {
-            D[j + 1] = D[j];
-            swap(j,j+1);
-            yield 'swap'+i+","+(i-1);
+function *quickSort(arr, left, right){
+    var len = arr.length,
+        pivot,
+        partitionIndex;
+
+
+    if(left < right){
+        pivot = right;
+
+        partitionIndex =  yield  *partition(arr, pivot, left, right);
+        //sort left and right
+        for (var i=left;i<=partitionIndex- 1;i++)
+        {
+            console.log('show '+i)
+            select(i,selectorder);
         }
-        D[j + 1] = key;
-        deselect(i,mainColor);
+        yield '';
+        for (var j=left;j<=partitionIndex- 1;j++)
+        {
+            console.log('disshow '+j)
+            deselect(j,mainColor);
+        }
+        yield  *quickSort(arr, left, partitionIndex - 1);
+        for (var k=partitionIndex+1;k<=right;k++)
+        {
+            console.log('show '+k)
+            select(k,selectorder);
+        }
+        yield '';
+        for (var g=partitionIndex + 1;g<=right;g++)
+        {
+            console.log('disshow '+g)
+            deselect(g,mainColor);
+        }
+        yield  *quickSort(arr, partitionIndex + 1, right);
     }
+    return arr;
 }
-var seq = insertion();
+function *partition(arr, pivot, left, right){
+    select(pivot,selectColor);
+    yield 'select pivot'+pivot;
+    var pivotValue = arr[pivot],
+        partitionIndex = left;
+    for(var i = left; i < right; i++){
+        select(i,selectColor);
+        yield 'select'+i;
+        deselect(i,mainColor);
+        if(arr[i] < pivotValue){
+
+            swap(arr, i, partitionIndex);
+            if (i !== partitionIndex)
+            {
+                swapR(i,partitionIndex);
+                yield 'swap'+i+' to '+partitionIndex;
+            }
+            partitionIndex++;
+        }
+    }
+    if (right !== partitionIndex)
+    {
+        swapR(right,partitionIndex);
+        yield 'swap'+right+' to '+partitionIndex;
+    }
+    swap(arr, right, partitionIndex);
+    deselect(partitionIndex,selected);
+    yield 'deselect pivot'+pivot;
+    return partitionIndex;
+}
+function swap(arr, i, j){
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+var seq = quickSort(myArray,0, myArray.length-1);
 var myTimer ;
 
 function stopAlgorithm () {
@@ -108,7 +163,7 @@ function resetAlgorithm()
     console.log('t'+tempArray);
     console.log('m'+myArray);
 
-    seq = insertion();
+    seq = quickSort(myArray,0, myArray.length-1);
 
     // $('svg').remove();
     //  svg = d3.select("#algorithm-box").append("svg")
@@ -156,14 +211,12 @@ function resetAlgorithm()
 }
 function nextAlgorithm()
 {
-    seq.next();
+    console.log(seq.next());
 }
 
 
 
-
-
-function swap(i,j) {
+function swapR(i,j) {
 
     slide(j,i);
     slide(i,j);
@@ -178,13 +231,14 @@ function swap(i,j) {
     jr.attr("id","rect" + i);
 
 
+
 }
 function slide(j, i) {
     d3.select("#text" + j)
         .transition().duration(durationTime)
     //.attr("transform", function(d) {return "translate(" + (x(i)) + ", 0)"})
         .attr("transform", function(d, k) {
-            console.log('swap '+j+':'+d+"to"+i)
+           // console.log('swap '+j+':'+d+"to"+i)
             if (d<0) return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle+(y(Math.abs(d))+15))+")"
             return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle-(y(d))-1)+")"
         })
@@ -199,9 +253,8 @@ function slide(j, i) {
 
         ).transition().duration(durationTime/9).style("fill", mainColor )
 
-
-
 }
+
 function select(j,color) {
     return d3.select("#rect" + j)
         .transition()

@@ -224,13 +224,16 @@ function *selection() {
 function swap(i,j) {
 
     slide(j,i);
-    console.log('slide(j,i)')
     slide(i,j);
-    console.log('slide(i,j)')
-    d3.select("#text" + j).attr("id","text" + i);
-    d3.select("#rect" + j).attr("id","rect" + i);
-    d3.select("#text" + i).attr("id","text" + j);
-    d3.select("#rect" + i).attr("id","rect" + j);
+    console.log('swap',i,'/',j);
+    var it= d3.select("#text" + i);
+    var jt= d3.select("#text" + j);
+    it.attr("id","text" + j);
+    jt.attr("id","text" + i);
+    var ir= d3.select("#rect" + i);
+    var jr= d3.select("#rect" + j);
+    ir.attr("id","rect" + j);
+    jr.attr("id","rect" + i);
 
 
 }

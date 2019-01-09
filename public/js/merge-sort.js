@@ -47,15 +47,15 @@ var svg = d3.select("#algorithm-box").append("svg")
     .style('margin','auto')
     .append("g").attr('transform','translate('+((mywidth-width)/2)+',0)');
 /*************************************** rect *************************************/
-var g = svg.append("g")
-    rects = g
+var g1 = svg.append("g")
+    rects = g1
     .selectAll("g")
     .data(myArray)
     .enter().append("g").attr('transform',function (d,i) {
             return 'translate('+0+',0)';
         })
 rects.attr("id", function(d,i) {return "rect" + i})
-    .append("rect")
+    .append("rect").attr("id", function(d,i) {return "rect1-" + i}).attr('class','rectss')
     .attr("rx", 6)
     .attr("ry", 6)
     .attr("transform", function(d, i) {
@@ -75,7 +75,7 @@ rects.append("text")
 
 /*************************************** rect *************************************/
 /*************************************** lable *************************************/
-var labels = g
+var labels = g1
     .selectAll("text")
     .data(myArray)
     .enter().append("text")
@@ -210,6 +210,7 @@ labels.attr("id", function(d,i) {return "text" + i})
 // }
 //
 // var seq = mergeSort(myArray);
+
 function *mergeSort (arr) {
     if (arr.length === 1) {
         // return once we hit an array with a single item
@@ -238,33 +239,50 @@ function *merge (left, right,l,r) {
     let indexRight = 0
     console.log(l,r)
     while (indexLeft < left.length && indexRight < right.length) {
+        select(left[indexLeft].index,selectorder);
+        select(right[indexRight].index,selectorder);
+        yield ''
         if (left[indexLeft].value < right[indexRight].value) {
           //  select(left[indexLeft].index,selectColor);
             result.push(left[indexLeft]);
+            select(left[indexLeft].index,selectColor);
+            yield ''
             goUp(left[indexLeft].index,indexLeft,result.length-1,xspace,yspace,'l',left.length+right.length,l);
+            select(left[indexLeft].index,mainColor);
+            yield ''
             indexLeft++
         } else {
            // select(right[indexRight].index,selectColor);
             result.push(right[indexRight]);
+            select(right[indexRight].index,selectColor);
+            yield ''
             goUp(right[indexRight].index,left.length+indexRight,result.length-1,xspace,yspace,'r',left.length+right.length,r);
+            select(right[indexRight].index,mainColor);
+            yield ''
             indexRight++
         }
     }
     while (indexLeft < left.length)
     {
         result.push(left[indexLeft]);
+        select(left[indexLeft].index,selectColor);
+        yield ''
         goUp(left[indexLeft].index,indexLeft,result.length-1,xspace,yspace,'l',left.length+right.length,l);
+        select(left[indexLeft].index,mainColor);
+        yield ''
         indexLeft++
     }
     while (indexRight < right.length)
     {
         result.push(right[indexRight]);
+        select(right[indexRight].index,selectColor);
+        yield ''
         goUp(right[indexRight].index,left.length+indexRight,result.length-1,xspace,yspace,'r',left.length+right.length,r);
+        select(right[indexRight].index,mainColor);
+        yield ''
         indexRight++
     }
     console.log('result'+JSON.stringify(result));
-
-
     yield '';
    // return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
     return result;
@@ -287,11 +305,13 @@ function resetAlgorithm()
     console.log('m'+myArray);
 
     seq = mergeSort(myArray.map((a,i)=>({value:a,index:i})));
-    var g = svg.append("g")
+    //var g = svg.append("g")
     rects.transition().duration(500).attr('transform',function (d,i) {
             return 'translate('+0+',0)';
         }).attr('class',0);
-
+    d3.selectAll(".rectss").style('fill',mainColor).attr('id',function (d,i) {
+        return 'rect1-'+i;
+    });
 
 
     // $('svg').remove();
@@ -346,15 +366,13 @@ function nextAlgorithm()
 function swap1(i,j) {
 
     slide(j,i);
-    console.log('slide(j,i)')
+    console.log('slide(j,i)');
     slide(i,j);
-    console.log('slide(i,j)')
+    console.log('slide(i,j)');
     d3.select("#text" + j).attr("id","text" + i);
     d3.select("#rect" + j).attr("id","rect" + i);
     d3.select("#text" + i).attr("id","text" + j);
     d3.select("#rect" + i).attr("id","rect" + j);
-
-
 }
 function swap(i,j) {
     slide(j,i,200);
@@ -395,12 +413,12 @@ function slide(j, i,dd) {
         .transition().duration(dd)
     //.attr("transform", function(d) {return "translate(" + (x(i-1)) + ", 0)"})
         .attr("transform", function(d, k) {
-            return "translate(" + (x(i)-x(j) ) + ","+ytr+") "}
+            return "translate(" + (x(i)-x(j)) + ","+ytr+") "}
         ).transition().duration(dd/9).style("fill", mainColor )
 }
 
 function select(j,color) {
-    return d3.select("#rect" + j)
+    return d3.select("#rect1-" + j)
         .transition()
         .duration(100)
         .style("fill", color )
