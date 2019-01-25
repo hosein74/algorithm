@@ -735,6 +735,67 @@ function *heap_root(input, i) {
 
 }
 
+function *heapSort(input) {
+    buildHeap( numbs );
+    //console.log(g.select('#3').data) ;
+    select(0,selectColor)
+    yield 'start'
+    select(0,mainColor)
+    for (var i=0;i<input.length;i++)
+    {
+        if (input[2*i+1]) {
+            select(2 * i + 1,selectColor)
+            numbs[2*i+1]=input[2*i+1];
+            addNode(i, input[2 * i + 1])
+            yield '';
+            select(2 * i + 1,mainColor);
+
+        }
+        if (input[2*i+2]){
+            select(2 * i + 2,selectColor)
+            numbs[2*i+2]=input[2*i+2];
+            addNode(i,input[2*i+2])
+            yield '';
+            select(2 * i + 2,mainColor)
+        }
+        // for (var j = Math.floor(numbs.length / 2); j >= 0; j -= 1)      {
+        //     yield *heap_root(numbs, j);
+        // }
+    }
+    //  swapNode(2,4);
+    // yield ''
+    //  swapNode(2,5);
+    //   removeNode(0);
+    yield '';
+    console.log(nodes);
+    array_length = input.length;
+    console.log( 'numbs ->'+ numbs)
+    console.log( 'input ->'+ input)
+    for (var i = Math.floor(input.length / 2); i >= 0; i -= 1)      {
+        yield *heap_root(input, i);
+    }
+    yield input;
+    console.log(input)
+    console.log('ta inja');
+    console.log(numbs)
+    for (i = input.length - 1; i > 0; i--) {
+        // swapNode(1,i+1)0
+        select(0,swapColor);
+        select(i,swapColor);
+        swapRect(0,i);
+        swap(input, 0, i);
+        swap(numbs, 0, i);
+        array_length--;
+        buildHeap(numbs.filter((a,i)=>i<array_length));
+        yield'';
+        select(0,mainColor);
+        select(i,finalorder);
+        console.log(nodes)
+        yield *heap_root(input, 0);
+    }
+    select(0,finalorder);
+}
+
 function swap(input, index_A, index_B) {
     var temp = input[index_A];
     input[index_A] = input[index_B];
@@ -796,67 +857,6 @@ function move(a,x,y,d) {
 }
 
 
-
-function *heapSort(input) {
-    buildHeap( numbs );
-   //console.log(g.select('#3').data) ;
-    select(0,selectColor)
-    yield 'start'
-    select(0,mainColor)
-   for (var i=0;i<input.length;i++)
-   {
-       if (input[2*i+1]) {
-           select(2 * i + 1,selectColor)
-           numbs[2*i+1]=input[2*i+1];
-           addNode(i, input[2 * i + 1])
-           yield '';
-           select(2 * i + 1,mainColor);
-
-       }
-       if (input[2*i+2]){
-       select(2 * i + 2,selectColor)
-       numbs[2*i+2]=input[2*i+2];
-       addNode(i,input[2*i+2])
-       yield '';
-       select(2 * i + 2,mainColor)
-       }
-       // for (var j = Math.floor(numbs.length / 2); j >= 0; j -= 1)      {
-       //     yield *heap_root(numbs, j);
-       // }
-   }
-   //  swapNode(2,4);
-   // yield ''
-   //  swapNode(2,5);
- //   removeNode(0);
-   yield '';
-    console.log(nodes);
-    array_length = input.length;
-    console.log( 'numbs ->'+ numbs)
-    console.log( 'input ->'+ input)
-    for (var i = Math.floor(input.length / 2); i >= 0; i -= 1)      {
-        yield *heap_root(input, i);
-    }
-    yield input;
-    console.log(input)
-    console.log('ta inja');
-    console.log(numbs)
-    for (i = input.length - 1; i > 0; i--) {
-       // swapNode(1,i+1)0
-        select(0,swapColor);
-        select(i,swapColor);
-        swapRect(0,i);
-        swap(input, 0, i);
-        swap(numbs, 0, i);
-        array_length--;
-        buildHeap(numbs.filter((a,i)=>i<array_length));
-        yield'';
-        select(0,mainColor);
-        select(i,finalorder);
-        console.log(nodes)
-        yield *heap_root(input, 0);
-    }
-    select(0,finalorder);
-}
 
 seq = heapSort(myArray.map((a,i)=>(a)));
 var myTimer ;

@@ -84,6 +84,7 @@
     </div>
     <script>
         var myArray = <%-locals.data? JSON.stringify(locals.data[0]): [1,-15,-5,20,41,21,54,31,24,20,30,2,1,25,30,12,5]%>;
+        var myMatrix = <%-locals.matrix? JSON.stringify(locals.matrix.slice(0,2)): [1,-15,-5,20,41,21,54,31,24,20,30,2,1,25,30,12,5]%>;
         console.log(myArray)
     </script>
     <!-- jquery
