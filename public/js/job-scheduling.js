@@ -1,4 +1,12 @@
 
+try {
+    console.log(myMatrix);
+}
+catch (e) {
+    myMatrix = [[[3, 6, 1, 4, 6,2,3,5],[20 ,19 ,27 ,25 ,15,50,50,10]],[]];
+
+}
+
 
 
 var mainColor = d3.rgb("#aa8eff");
@@ -23,7 +31,6 @@ function myCompare(a,b) {
         return 0;
 
 }
-myMatrix = [[[3, 6, 1, 4, 6,2,3,5],[20 ,19 ,27 ,25 ,15,50,50,10]],[]];
 var deadTimes = myMatrix[0][0];
 var profits = myMatrix[0][1];
 

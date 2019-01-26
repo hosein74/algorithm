@@ -1,4 +1,12 @@
-myArray = [5,9,3,-5,3,6,-1,4,2,4];
+
+
+try {
+    console.log(myArray);
+}
+catch (e) {
+    myArray = [5,9,-8,6,3,8,7,4,1,1,10];
+}
+
 var mainColor = d3.rgb("#aa8eff");
 var swapColor = d3.rgb("#ffaa55");
 var selectColor = d3.rgb("#ff6259");

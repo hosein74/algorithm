@@ -1,5 +1,12 @@
 
 
+try {
+    console.log(myArray);
+}
+catch (e) {
+    myArray = ['asdasdfgfdsasdfs'];
+}
+
 log = console.log.bind(console);
 
 var mainColor = d3.rgb("#aa8eff");
@@ -1688,68 +1695,13 @@ function resumeAlgorithm()
 function resetAlgorithm()
 {
     clearInterval(myTimer);
-    myArray = tempArray.map(a=>a);
-    console.log('t'+tempArray);
-    console.log('m'+myArray);
+   // myArray = tempArray.map(a=>a);
+    //console.log('t'+tempArray);
+   // console.log('m'+myArray);
 
-    seq = heapSort(tempArray.map((a,i)=>a));
-    //var g = svg.append("g")
-    rects.transition().duration(500).attr('transform',function (d,i) {
-        return 'translate('+x(i)+',0)';
-    }).attr('class',0).attr('id',function (d,i) {
-        return 'rect'+i;
-    });
-    d3.selectAll(".rectss").style('fill',mainColor).attr('id',function (d,i) {
-        return 'rect1-'+i;
-    });
-    numbs=[myArray[0]];
-    buildHeap([])
-
-
-
-    // $('svg').remove();
-    //  svg = d3.select("#algorithm-box").append("svg")
-    //     .attr("width", width )
-    //     .attr("height", height )
-    //     .append("g")
-    //  rects = svg.append("g")
-    //     .attr("transform", "translate(" + barWidth + ",0) ")
-    //     .selectAll("rect")
-    //     .data(myArray)
-    //     .enter().append("rect")
-    //
-    // rects.attr("id", function(d,i) {return "rect" + i})
-    //     .attr("transform", function(d, i) {
-    //         if (d<0) return "translate(" + (x(i) ) + ","+(middle+y(Math.abs(d)))+")  rotate(180) "
-    //         return "translate(" + (x(i) ) + ","+(middle)+") rotate(180)"})
-    //     .attr("width", barWidth *.9)
-    //     .attr("height", function(d,i) {
-    //         return  y(Math.abs(d))
-    //
-    //     })
-    //
-    //  labels = svg.selectAll("text")
-    //     .data(myArray)
-    //     .enter().append("text")
-    //
-    // labels.attr("id", function(d,i) {return "text" + i})
-    //     .attr("transform", function(d, i) {
-    //         if (d<0) return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle+(y(Math.abs(d))+15))+")"
-    //         return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle-(y(d))-1)+")"
-    //     })
-    //     .html(function(d) {return d;})
-    // labels.attr("class", "").attr("id",function(d, i) {return "text" + i})
-    //     .transition().duration(500)
-    //     .attr("transform", function(d, i) {
-    //         if (d<0) return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle+(y(Math.abs(d))+15))+")"
-    //         return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle-(y(d))-1)+")"
-    //     })
-    //
-    // rects.attr("class", "").attr("id",function(d, i) {return "rect" + i})
-    //     .transition().duration(500)
-    //     .attr("transform", function(d, i) {
-    //         if (d<0) return "translate(" + (x(i) ) + ","+(middle+y(Math.abs(d)))+")  rotate(180) "
-    //         return "translate(" + (x(i) ) + ","+(middle)+") rotate(180)"}).style("fill", mainColor )
+    seq = Huffman.encode(myArray.map(a=>a));
+    g2.selectAll('g').remove();
+    create()
 }
 function nextAlgorithm()
 {

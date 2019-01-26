@@ -96,14 +96,14 @@ router.post('/algorithm/:name/:operations',files.single('file'), function(req, r
           ]
                             ];
       if ( req.params.operations === 'animation') {
-          res.render('pages/index', {algorithmName: req.params.name, animation: true , data : defulatData,matrix:defulatMatrix});
+          res.render('pages/index', {algorithmName: req.params.name, animation: true , data : null});
       }else if (req.params.operations === 'analyze')
       {
           //var time = bubbleSort([1,8,9,6,8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,-8,-3,5]);
-          var times = analyzeAlgorithm(req.params.name,defulatData,defulatMatrix);
-          let def = defulatData.map(d=>{d.push(d.length); return d})
+          var times = analyzeAlgorithm(req.params.name,null,null);
+          //let def = defulatData.map(d=>{d.push(d.length); return d})
 
-          res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : def , times :times,matrix:defulatMatrix});
+          res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : times.data , times :times.times,matrix:defulatMatrix});
       }
   }
     //

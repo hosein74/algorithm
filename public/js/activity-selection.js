@@ -1,5 +1,11 @@
 
 
+try {
+    console.log(myMatrix);
+}
+catch (e) {
+    myMatrix = [[[5, 1, 3, 0, 5, 8,1],[9 ,2 ,4 ,6 ,7 ,9,8]],[]];
+}
 
 var mainColor = d3.rgb("#aa8eff");
 var swapColor = d3.rgb("#ffaa55");
@@ -23,7 +29,6 @@ function myCompare(a,b) {
         return 0;
 
 }
-myMatrix = [[[5, 1, 3, 0, 5, 8,1],[9 ,2 ,4 ,6 ,7 ,9,8]],[]];
 var start = myMatrix[0][0];
 var end = myMatrix[0][1];
 
@@ -45,7 +50,7 @@ try {
 }
 catch (e) {
     console.log(e);
-    alert(e);
+   // alert(e);
 }
 
 var length = start.length;
@@ -112,7 +117,7 @@ rects.append("text").attr("id", function(d,i) {return "start-" + i}).attr('class
 rects.append("text").attr("id", function(d,i) {return "end-" + i}).attr('class','ends').text(function (d,i) {
     return d.end;
 }).attr('transform',function (d,i) {
-    return 'translate('+ x(d.end - d.start) +1 +','+(barWidth/2)+')';
+    return 'translate('+ x((d.end - d.start)) +','+(barWidth/2)+')';
 })
 
 

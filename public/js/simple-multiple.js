@@ -1,6 +1,12 @@
 
 
 
+try {
+    console.log(myArray);
+}
+catch (e) {
+    myArray = [2469,455552];
+}
 var mainColor = d3.rgb("#aa8eff");
 var mainColor1 = d3.rgb("#a83dff");
 var swapColor = d3.rgb("#ffaa55");
@@ -20,7 +26,6 @@ var bogoShuffles = 0;
 //     myArray.push(max)
 // }
 
-myArray = [2469,455552];
 var TempMatrix =  myArray.map(a=>a);
 var AN = myArray[0] ;
 var BN = myArray[1] ;

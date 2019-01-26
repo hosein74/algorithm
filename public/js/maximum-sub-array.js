@@ -1,5 +1,11 @@
 
 
+try {
+    console.log(myArray);
+}
+catch (e) {
+    myArray = [-2, 3, 4, -1, -6, -7, 5, 10,-8];
+}
 
 var mainColor = d3.rgb("#aa8eff");
 var swapColor = d3.rgb("#ffaa55");
@@ -14,7 +20,6 @@ var steps = 0;
 var bogoShuffles = 0;
 
 /******array calculate******/
-myArray = [-2, -3, 4, -1, -6, -7, 5, 10,-8];
 //console.log(myArray.length)
 var max = Math.max(...myArray);
 
