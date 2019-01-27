@@ -5,23 +5,29 @@ var path = require('path');
 var files = multer({ dest: 'files/' });
 var fs = require('fs');
 var readline = require('readline')
-var analyzeAlgorithm = require('../functions/algorithm')
+var {analyzeAlgorithm,helpAlgorithm} = require('../functions/algorithm')
 
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
+log('test');
   res.render('pages/index', { title : 'heello' });
 });
 
 router.get('/algorithm/:name', function(req, res, next) {
+    log('j');
     res.render('pages/index', { algorithmName : req.params.name });
 });
 
 
 router.post('/algorithm/:name/:operations',files.single('file'), function(req, res, next) {
-  if (req.file)
+  if (req.params.operations === 'help-file')
+  {
+      var desc = helpAlgorithm(req.params.name);
+      res.render('pages/index', {algorithmName: req.params.name,help:true , data : null,desc:desc.desc,url:desc.url});
+  }
+  else if (req.file)
   {
       var flag = 0;
       var matrix=[],mat=[];
@@ -44,7 +50,6 @@ router.post('/algorithm/:name/:operations',files.single('file'), function(req, r
           {
               mat.push(l)
           }
-          console.log(flag)
       });
       lineReader.on('error', function (err) {
           console.log('Line from file err:', err);
@@ -63,9 +68,12 @@ router.post('/algorithm/:name/:operations',files.single('file'), function(req, r
               res.render('pages/index', {algorithmName: req.params.name, animation: true , data : array,matrix:matrix});
           }else if (req.params.operations === 'analyze')
           {
+
               var times = analyzeAlgorithm(req.params.name,array,matrix);
               //bubbleSort(array)
-              res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : array , times :times,matrix : matrix});
+
+              res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : times.data , times :times.times,matrix : matrix});
+              //next();
           }
       });
   }
@@ -99,17 +107,15 @@ router.post('/algorithm/:name/:operations',files.single('file'), function(req, r
           res.render('pages/index', {algorithmName: req.params.name, animation: true , data : null});
       }else if (req.params.operations === 'analyze')
       {
+
           //var time = bubbleSort([1,8,9,6,8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,-8,-3,5]);
           var times = analyzeAlgorithm(req.params.name,null,null);
           //let def = defulatData.map(d=>{d.push(d.length); return d})
 
-          res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : times.data , times :times.times,matrix:defulatMatrix});
+          res.render('pages/index', {algorithmName: req.params.name, analyze: true, data : times.data , times :times.times,matrix:times.data});
       }
   }
-    //
-    // fs.readFile('files/'+req.file.filename, 'utf8', function(err, contents) {
-    //     var array = JSON.parse("[" + contents + "]");
-    // });
+
 
 });
 

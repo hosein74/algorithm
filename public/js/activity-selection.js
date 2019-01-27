@@ -27,10 +27,9 @@ function myCompare(a,b) {
         return -1;
     else
         return 0;
-
 }
-var start = myMatrix[0][0];
-var end = myMatrix[0][1];
+var start = myMatrix[0][0].map(Number);
+var end = myMatrix[0][1].map(Number);
 
 var TempMatrix =  myMatrix.map(a=>a);
 var myActivites=[];
@@ -46,12 +45,12 @@ try {
         myActivites.push({start:start[i],end:end[i],index:i});
     }
     myActivites.sort(myCompare);
-
 }
 catch (e) {
     console.log(e);
    // alert(e);
 }
+console.log(myActivites)
 
 var length = start.length;
 var element = d3.select("#algorithm-box").node();

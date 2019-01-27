@@ -256,6 +256,7 @@
                      console.log(t)
                      times.push(t);
                  }
+                 log(times);
                  return {data:bdata,times:times};
                  break;
              case 'selection-sort':
@@ -480,49 +481,74 @@
                         [
                             [ 0, 8, 9],
                             [5,9,6,1],
-                            [8,5,9,1],
+                            [8,5,9,1]
 
                         ]
                     ];
-                    if (data)
-                        mmdata = data;
-                    var stack = [];
 
+                    if (matrix)
+                        mmdata = matrix;
+                    var stackmm = [];
+                    log('////////////////////////////////////////////')
+                    log(mmdata)
+                    log('/////////////////////////////////////')
+                    log(matrix)
+                    log('/////////////////////////////////////')
+             function multiply1(a, b) {
+                 console.log(a,b)
+                 stackmm.push([[a.length,a[0].length],[b.length,b[0].length]])
+                 var aNumRows = a.length, aNumCols = a[0].length,
+                     bNumRows = b.length, bNumCols = b[0].length,
+                     m = new Array(aNumRows);  // initialize array of rows
+                 for (var r = 0; r < aNumRows; ++r) {
+                     simplematrixmultipleCounter++;
+                     m[r] = new Array(bNumCols); // initialize the current row
+                     for (var c = 0; c < bNumCols; ++c) {
+                         m[r][c] = 0;             // initialize the current cell
+                         simplematrixmultipleCounter++;
+                         for (var i = 0; i < aNumCols; ++i) {
+                             m[r][c] += a[r][i] * b[i][c];
+                             simplematrixmultipleCounter++;
+                         }
+                     }
+                 }
+                 return simplematrixmultipleCounter;
+             }
                     for (let i = 0; i < mmdata.length-1; i=i+2) {
                         var simplematrixmultipleCounter = 0;
                         var simplematrixmultipleArray = mmdata[i].map(d => d);
-
-                        function multiply(a, b) {
-                            stack.push([[a.length,a[0].length],[b.length,b[0].length]])
-                            console.log(a,b)
-                            var aNumRows = a.length, aNumCols = a[0].length,
-                                bNumRows = b.length, bNumCols = b[0].length,
-                                m = new Array(aNumRows);  // initialize array of rows
-                            for (var r = 0; r < aNumRows; ++r) {
-                                simplematrixmultipleCounter++;
-                                m[r] = new Array(bNumCols); // initialize the current row
-                                for (var c = 0; c < bNumCols; ++c) {
-                                    m[r][c] = 0;             // initialize the current cell
-                                    simplematrixmultipleCounter++;
-                                    for (var i = 0; i < aNumCols; ++i) {
-                                        m[r][c] += a[r][i] * b[i][c];
-                                        simplematrixmultipleCounter++;
-                                    }
-                                }
-                            }
-                            return simplematrixmultipleCounter;
-                        }
-
                         var d = process.hrtime();
-                        t = multiply(mmdata[i], mmdata[i+1]);
+                        t = multiply1(mmdata[i], mmdata[i+1]);
                         t = simplematrixmultipleCounter;
                         times.push(t);
                     }
                     console.log(mmdata);
-                    console.log(stack)
-                    return {data:stack,times:times};
+                    console.log(stackmm)
+                    return {data:stackmm,times:times};
                     break;
              case 'strassen--matrix-multiple':
+                 var stackmm = [];
+
+             function multiply(a, b) {
+                 stackmm.push([[a.length,a[0].length],[b.length,b[0].length]])
+                 console.log(a,b)
+                 var aNumRows = a.length, aNumCols = a[0].length,
+                     bNumRows = b.length, bNumCols = b[0].length,
+                     m = new Array(aNumRows);  // initialize array of rows
+                 for (var r = 0; r < aNumRows; ++r) {
+                     simplematrixmultipleCounter++;
+                     m[r] = new Array(bNumCols); // initialize the current row
+                     for (var c = 0; c < bNumCols; ++c) {
+                         m[r][c] = 0;             // initialize the current cell
+                         simplematrixmultipleCounter++;
+                         for (var i = 0; i < aNumCols; ++i) {
+                             m[r][c] += a[r][i] * b[i][c];
+                             simplematrixmultipleCounter++;
+                         }
+                     }
+                 }
+                 return simplematrixmultipleCounter;
+             }
                  let smmdata = [[
                      [ 9, 6 ],
                      [1,8],
@@ -545,9 +571,8 @@
 
                      ]
                  ];
-                 if (data)
-                     smmdata = data;
-                 var stack = [];
+                 if (matrix)
+                     smmdata = matrix;
 
                  for (let i = 0; i < smmdata.length-1; i=i+2) {
                      var simplematrixmultipleCounter = 0;
@@ -555,20 +580,22 @@
 
 
                      var d = process.hrtime();
-                     t = multiply(mmdata[i], mmdata[i+1]);
+                     t = multiply(smmdata[i], smmdata[i+1]);
                      t = simplematrixmultipleCounter;
                      times.push(t);
                  }
-                 console.log(mmdata);
+                 console.log(smmdata);
                  console.log(stack)
-                 return {data:stack,times:times};
+                 return {data:stackmm,times:times};
                  break;
              case 'simple-multiple':
                  var stack = [];
-                 let smdata = [2469,455552,2324,32424,12313,1342];
-                 if (data)
-                     smdata = data;
+                 let smdata = [[[2469,455552],[2324,32424],[12313,1342]]];
+                 if (matrix)
+                     smdata = matrix;
+                 log(matrix)
              function  SimpleMultiple(a,b) {
+                 log(a,b)
                  var AN = a ;
                  var BN = b ;
                  var AA = a.toString().split("").map(Number);
@@ -597,18 +624,17 @@
                  }
                  return simplemultipleCounter;
              }
-
-                 for (let i = 0; i < smdata.length-1; i=i+2) {
-                     stack.push([smdata[i],smdata[i+1]]);
+                 for (let i = 0; i < smdata[0].length; i++) {
+                     stack.push([smdata[0][i][0],smdata[0][i][1]]);
                      var simplemultipleCounter = 0;
                    //  var simplemultipleArray = smdata[i].map(d => d);
                      var array_length = smdata.length
                      var d = process.hrtime();
-                     t = SimpleMultiple(smdata[i],smdata[i+1]);
+                     t = SimpleMultiple(smdata[0][i][0],smdata[0][i][1]);
                      t = simplemultipleCounter;
                      times.push(t);
                  }
-                 return {data:stack,times:times};
+                 return {data:smdata[0],times:times};
                  break;
              case 'karatsuba-multiple':
                  var stack = [];
@@ -698,7 +724,7 @@
                  return {data:msdata,times:times};
                  break;
              case 'activity-selection':
-             function myCompare(a,b) {
+             function myCompare1(a,b) {
                  activityselectionCounter++;
                  if (a.end > b.end)
                      return 1;
@@ -708,7 +734,7 @@
                      return 0;
 
              }
-                 function printMaxActivities(arr) {
+                 function printMaxActivities1(arr) {
                  // The first activity always gets selected
                      var start = arr[0];
                      var end = arr[1];
@@ -723,14 +749,14 @@
                                  throw (new Error('start and end not valid in index '+i));
                              myActivites.push({start:start[i],end:end[i],index:i});
                          }
-                         myActivites.sort(myCompare);
+                      //   stack.push(myActivites)
+                         myActivites.sort(myCompare1);
 
                      }
                      catch (e) {
                          console.log(e);
                        //  alert(e);
                      }
-
                  var i = 0;
                      // Consider rest of the activities
                  for (var j = 1; j < arr.length; j++){
@@ -745,9 +771,9 @@
                      }
                  }
              }
-                 let asdata = [[[5, 1, 3, 0, 5, 8,1],[9 ,2 ,4 ,6 ,7 ,9,8]],[[5, 6, 3, 1, 5, 8,9,10],[9 ,8 ,4 ,10 ,7 ,9,8,11]]];
-                 if (data)
-                     asdata = data;
+                 let asdata = [[[5, 1, 3, 0, 5, 8,1],[9 ,2 ,4 ,6 ,7 ,9,8]],[[5, 6, 3, 1, 5, 8,9,10],[9 ,8 ,4 ,10 ,7 ,9,10,11]]];
+                 if (matrix)
+                     asdata = matrix;
                  var stack = [];
 
                  for (let i = 0; i < asdata.length; i++) {
@@ -755,13 +781,13 @@
                      var activityselectionArray = asdata[i].map(d => d);
 
                      var d = process.hrtime();
-                     t=printMaxActivities(asdata[i])
+                     t=printMaxActivities1(asdata[i])
                      t = activityselectionCounter;
                      times.push(t);
                  }
                  console.log(asdata);
-                 console.log(stack)
-                 return {data:asdata,times:times};
+                 console.log(stack);
+                 return {data:asdata.map(d=>d[0].length),times:times};
                  break;
              case 'huffman':
                  var Heap = function(fn) {
@@ -855,7 +881,7 @@
                          var result = '';
                          for (var i = 0; i < data.length; i++) {
                              huffmanCounter++;
-                             result += dict[data.charAt(i)];
+                             result += dict[data[(i)]];
                          }
                          var header = Object.keys(dict).map(function(e) {
                              return e.charCodeAt(0) + '|' + dict[e];
@@ -885,16 +911,17 @@
                          return result;
                      }
                  };
-                 let hfdata = ['asdasdfgfdsasdfs','qwsxcvfdsgfdvhgnbcdfgrewd','asdsasdsasdsasd'];
+                 let hfdata = [['asdasdfgfdsasdfs'],['qwsxcvfdsgfdvhgnbcdfgrewd'],['asdsasdsasdsasd']];
                  if (data)
                      hfdata = data;
                  var stack = [];
+                 log(hfdata)
                  for (let i = 0; i < hfdata.length; i++) {
                      var huffmanCounter = 0;
                   //   var huffmanArray = hfdata[i].map(d => d);
 
                      var d = process.hrtime();
-                     t= Huffman.encode(hfdata[i]);
+                     t= Huffman.encode(hfdata[i][0]);
                      t = huffmanCounter;
                      times.push(t);
                  }
@@ -972,7 +999,7 @@
                  }
                  return result;
              }
-                 let jsdata =    [[[3, 6, 1, 4, 6,2,3,5],[20 ,19 ,27 ,25 ,15,50,50,10]],[[5, 3, 4, 4, 2,1,3,5],[20 ,20 ,15 ,10 ,15,40,50,10]]];
+                 let jsdata =[[[3, 6, 1, 4, 6,2,3,5],[20 ,19 ,27 ,25 ,15,50,50,10]],[[5, 3, 4, 4, 2,1,3,5],[20 ,20 ,15 ,10 ,15,40,50,10]]];
                  if (data)
                      jsdata = data;
                  var stack = [];
@@ -1027,8 +1054,8 @@
                  return data;
              }
                  console.log(data);
-                if (data)
-                     dfsdata = data;
+                if (matrix)
+                     dfsdata = matrix;
                  var stack1 = [];
                  for (let i = 0; i < dfsdata.length; i++) {
                      data = convertToGraph(dfsdata[i]);
@@ -1091,8 +1118,8 @@
                  return data;
              }
                  console.log(data);
-                 if (data)
-                     bfsdata = data;
+                 if (matrix)
+                     bfsdata = matrix;
                  var stack1 = [];
                  for (let i = 0; i < bfsdata.length; i++) {
                      data = convertToGraph(bfsdata[i]);
@@ -1176,8 +1203,8 @@
                  return data;
              }
 
-                 if (data)
-                     primdata = data;
+                 if (matrix)
+                     primdata = matrix;
                  var stack1 = [];
                  for (let i = 0; i < primdata.length; i++) {
                      data = convertToGraph1(primdata[i]);
@@ -1278,8 +1305,8 @@
                  return data;
              }
 
-                 if (data)
-                     kruskalsdata = data;
+                 if (matrix)
+                     kruskalsdata = matrix;
                  var stack1 = [];
                  for (let i = 0; i < kruskalsdata.length; i++) {
                      data = convertToGraph1(kruskalsdata[i]);
@@ -1391,8 +1418,8 @@
                  return data;
              }
 
-                 if (data)
-                     dijkstrasdata = data;
+                 if (matrix)
+                     dijkstrasdata = matrix;
                  var stack1 = [];
                  for (let i = 0; i < dijkstrasdata.length; i++) {
                      data = convertToGraph1(dijkstrasdata[i]);
@@ -1407,11 +1434,90 @@
                  console.log(stack1)
                  return {data:stack1,times:times};
                  break;
-
-
          }
-
-     return times;
-
  }
-module.exports =analyzeAlgorithm;
+ const helpAlgorithm = function (type) {
+var data;
+var times;
+     switch (type) {
+
+         case 'bubble-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'selection-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'insertion-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'merge-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'quick-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'heap-sort':
+             return {desc:'فایل الگوریتم های مرتب سازی باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'simple-matrix-multiple':
+             return {desc:'فایل الگوریتم های ماتریس شامل جفت ماتریس هایی است این ماتریس ها به این شکل در فایل txt  باید در نظر گرفته شوند که هر سطر ماتریس در یک سطر که درایه های آن با , از هم جدا شده اند  و هر ماتریس با یک جدا کننده * از هم جدا می شوند بعد از آخرین ماتریس نیز علامت * باید گزاشته شود تعداد ماتریس ها باید زوج باشد در این حالت ماتریس ها دو به دو در هم ضرب می شوند و برای نمایش نیز فقط دو ماتریس اول نمایش داده می شود البته توجه نمایید درایه های ماتریس باید عدد باشند و همچنین ماتریس ها از قواعد ضرب ماتریس ها پیروی بکنند نمونه فایل را در زیر می توانید دانلود کنید '
+                 ,url:'/files/Matrix.txt'};
+             break;
+         case 'strassen--matrix-multiple':
+             return {desc:'فایل الگوریتم های ماتریس شامل جفت ماتریس هایی است این ماتریس ها به این شکل در فایل txt  باید در نظر گرفته شوند که هر سطر ماتریس در یک سطر که درایه های آن با , از هم جدا شده اند  و هر ماتریس با یک جدا کننده * از هم جدا می شوند بعد از آخرین ماتریس نیز علامت * باید گزاشته شود تعداد ماتریس ها باید زوج باشد در این حالت ماتریس ها دو به دو در هم ضرب می شوند و برای نمایش نیز فقط دو ماتریس اول نمایش داده می شود البته توجه نمایید درایه های ماتریس باید عدد باشند و همچنین ماتریس ها از قواعد ضرب ماتریس ها پیروی بکنند نمونه فایل را در زیر می توانید دانلود کنید '
+                 ,url:'/files/Matrix.txt'};
+             break;
+         case 'simple-multiple':
+             return {desc:'فایل الگوریتم های ضرب اعداد شامل جفت اعداد است این جفت ها به این شکل در فایل txt  باید در نظر گرفته شوند که هر جفت عدد در یک سطر که عدد های آن با , از هم جدا شده اند و در خر ورودی هم علامت * گزاشته شود برای نمایش نیز فقط سطر اول نمایش داده می شود  نمونه فایل را در زیر می توانید دانلود کنید '
+                 ,url:'/files/Numbers.txt'};
+             break;
+         case 'karatsuba-multiple':
+             return {desc:'فایل الگوریتم های ضرب اعداد شامل جفت اعداد است این جفت ها به این شکل در فایل txt  باید در نظر گرفته شوند که هر جفت عدد در یک سطر که عدد های آن با , از هم جدا شده اند و در خر ورودی هم علامت * گزاشته شود برای نمایش نیز فقط سطر اول نمایش داده می شود  نمونه فایل را در زیر می توانید دانلود کنید '
+                 ,url:'/files/Numbers.txt'};
+             break;
+         case 'maximum-sub-array':
+             return {desc:'فایل الگوریتم زیرآرایه بیشینه باید شامل آرایه هایی باشد که عددی باشند و شامل اعداد در فایل txt  به این شکل قرار بگیرند که هر سطر یک آرایه که با جدا کننده , از هم جدا شده اند توجه کنید که حداقل یک عدد مثبت در آرایه باید موجود باشد نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Arrays.txt'};
+             break;
+         case 'activity-selection':
+             return {desc:'فایل الگوریتم انتخاب فعالیت به این صورت است که در خط اول آرایه ای از زمان از دست دادن ارزش  فعالیت و در خط دوم آرایه ای از ارزش فعالیت ها می باشد که به این صورت تکرار می شود که بین آن ها علامت ستاره می باشد  درایه های آرایه نیز با , از هم جدا می شوند به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Jobs.txt'};
+             break;
+         case 'huffman':
+             return {desc:'فایل الگوریتم  به صورت شرشته هایی هست که هر سطر شامل یک رشته می باشد به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/String.txt'};
+             break;
+         case 'job-scheduling':
+             return {desc:'فایل الگوریتم زمان بندی کار ها به این صورت است که در خط اول آرایه ای از زمان از دست دادن ارزش  فعالیت و در خط دوم آرایه ای از ارزش فعالیت ها می باشد که به این صورت تکرار می شود که بین آن ها علامت ستاره می باشد  درایه های آرایه نیز با , از هم جدا می شوند به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Jobs.txt'};
+             break;
+         case 'dfs':
+             return {desc:'فایل الگوریتم های گراف به این صورت است که در خط اول آرایه ای از نود های آرایه و سطر های بعد در هر سطر دو جفت که یال ها را نشان می دهند و درایه سوم هم وزن یال  به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Graphs.txt'};
+             break;
+         case 'bfs':
+             return {desc:'فایل الگوریتم های گراف به این صورت است که در خط اول آرایه ای از نود های آرایه و سطر های بعد در هر سطر دو جفت که یال ها را نشان می دهند و درایه سوم هم وزن یال  به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Graphs.txt'};
+             break;
+         case 'prim':
+             return {desc:'فایل الگوریتم های گراف به این صورت است که در خط اول آرایه ای از نود های آرایه و سطر های بعد در هر سطر دو جفت که یال ها را نشان می دهند و درایه سوم هم وزن یال  به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Graphs.txt'};
+             break;
+         case 'kruskals':
+             return {desc:'فایل الگوریتم های گراف به این صورت است که در خط اول آرایه ای از نود های آرایه و سطر های بعد در هر سطر دو جفت که یال ها را نشان می دهند و درایه سوم هم وزن یال  به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Graphs.txt'};
+             break;
+         case 'dijkstras':
+             return {desc:'فایل الگوریتم های گراف به این صورت است که در خط اول آرایه ای از نود های آرایه و سطر های بعد در هر سطر دو جفت که یال ها را نشان می دهند و درایه سوم هم وزن یال  به عنوان مثال نمونه در زیر قابل دانلود می باشد '
+                 ,url:'/files/Graphs.txt'};
+             break;
+     }
+ }
+
+ module.exports ={analyzeAlgorithm,helpAlgorithm};

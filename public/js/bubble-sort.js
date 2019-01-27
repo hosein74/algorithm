@@ -3,7 +3,7 @@ try {
     console.log(myArray);
 }
 catch (e) {
-    myArray = [5,9,-8,6,3,8,7,4,1,1,10];
+    myArray = [5,9,-8,6,21,8,7,4,1,1,10];
 }
 
 var mainColor = d3.rgb("#aa8eff");

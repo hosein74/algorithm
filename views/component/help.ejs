@@ -1,0 +1,54 @@
+
+<script src="/js/Chart.min.js"></script>
+<div class="mailbox-view-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="hpanel email-compose mailbox-view ">
+
+                    <div class="panel-body panel-csm ">
+                        <div class="" style="align-items:start;direction: rtl">
+                            <h4 >توضیحات</h4>
+
+                            <p><%-locals.desc? JSON.stringify(locals.desc):'متنی وجود ندارد'%></p>
+                            <h4 >نمونه فایل</h4>
+
+                        </div>
+                    </div>
+
+                    <div class="border-bottom border-left border-right bg-white mg-tb-15">
+
+
+                        <div>
+                            <div class="row ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="hpanel vw-mb">
+                                        <div class="panel-body file-body incon-ctn-view">
+                                            <i class="fa fa-file-pdf-o text-info"></i>
+                                        </div>
+                                        <div class="panel-footer ft-pn">
+                                            <a download href=<%-locals.url? JSON.stringify(locals.url):'#'%>><%-locals.url? JSON.stringify(locals.url.split(/\//)[2]):'فایلی وجود ندارد'%></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div
+
+
+
+<script language="JavaScript">
+
+
+</script>
+
+

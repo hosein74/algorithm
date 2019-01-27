@@ -80,6 +80,7 @@
         <%-  (locals.algorithmName) ? include('../component/algorithmOperation.ejs', {algorithmName: locals.algorithmName}):'' %>
         <%-  locals.animation ? include('../component/algorithmAnimate.ejs', {animation: locals.animation}):'' %>
         <%- locals.analyze ? include('../component/algorithmAnalyse.ejs', {analyze: locals.analyze , data:locals.data,times:locals.times}):'' %>
+        <%- locals.help ? include('../component/help.ejs', {help: locals.help , desc:locals.desc,url:locals.url}):'' %>
         <%  include ../partials/footer %>
     </div>
     <script>
