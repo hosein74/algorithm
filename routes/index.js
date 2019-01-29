@@ -5,7 +5,7 @@ var path = require('path');
 var files = multer({ dest: 'files/' });
 var fs = require('fs');
 var readline = require('readline')
-var {analyzeAlgorithm,helpAlgorithm} = require('../functions/algorithm')
+var {analyzeAlgorithm,helpAlgorithm,descriptionAlgorithm} = require('../functions/algorithm')
 
 
 
@@ -22,7 +22,12 @@ router.get('/algorithm/:name', function(req, res, next) {
 
 
 router.post('/algorithm/:name/:operations',files.single('file'), function(req, res, next) {
-  if (req.params.operations === 'help-file')
+    if (req.params.operations === 'description')
+    {
+        var desc = descriptionAlgorithm(req.params.name);
+        res.render('pages/index', {algorithmName: req.params.name,description:true , data : null,desc: desc});
+    }
+  else if (req.params.operations === 'help-file')
   {
       var desc = helpAlgorithm(req.params.name);
       res.render('pages/index', {algorithmName: req.params.name,help:true , data : null,desc:desc.desc,url:desc.url});

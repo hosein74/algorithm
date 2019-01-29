@@ -2,6 +2,7 @@
 $('#animation-algorithm').on( "click",getAlgorithm );
 $('#analyze-algorithm').on( "click",getAlgorithm );
 $('#help-file-algorithm').on( "click",getAlgorithm );
+$('#description-algorithm').on( "click",getAlgorithm );
 
 let path =window.location.pathname.split(/\//);
 console.log(path)

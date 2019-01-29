@@ -36,6 +36,8 @@
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet"
+          href="/css/code-editor/codeviewer.css">
     <!-- educate icon CSS
 		============================================ -->
     <link rel="stylesheet" href="/css/educate-custon-icon.css">
@@ -46,7 +48,10 @@
 		============================================ -->
     <link rel="stylesheet" href="/css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- metisMenu CSS
+
 		============================================ -->
+    <link rel="stylesheet" href="/css/code-editor/codemirror.css">
+    <link rel="stylesheet" href="/css/code-editor/ambiance.css">
     <link rel="stylesheet" href="/css/metisMenu/metisMenu.min.css">
     <link rel="stylesheet" href="/css/metisMenu/metisMenu-vertical.css">
     <!-- calendar CSS
@@ -81,14 +86,21 @@
         <%-  locals.animation ? include('../component/algorithmAnimate.ejs', {animation: locals.animation}):'' %>
         <%- locals.analyze ? include('../component/algorithmAnalyse.ejs', {analyze: locals.analyze , data:locals.data,times:locals.times}):'' %>
         <%- locals.help ? include('../component/help.ejs', {help: locals.help , desc:locals.desc,url:locals.url}):'' %>
+        <%- locals.description ? include('../component/description.ejs', {description: locals.description , desc:locals.desc}):'' %>
         <%  include ../partials/footer %>
     </div>
     <script>
-      //  var myArray = <%-locals.data? JSON.stringify(locals.data[0]): [1,-15,-5,20,41,21,54,31,24,20,30,2,1,25,30,12,5]%>;
-       // var myMatrix = <%-locals.matrix? JSON.stringify(locals.matrix.slice(0,2)): [1,-15,-5,20,41,21,54,31,24,20,30,2,1,25,30,12,5]%>;
-        var myArray = <%-locals.data? JSON.stringify(locals.data[0]): null%>;
-        var myMatrix = <%-locals.matrix? JSON.stringify(locals.matrix.slice(0,2)): null%>;
+        if (<%- locals.animation? true: false %>) {
+            try {
+                var myArray = <%- locals.data? JSON.stringify(locals.data[0]): null %>;
+                var myMatrix = <%- locals.matrix? JSON.stringify(locals.matrix.slice(0, 2)): null %>;
+            }
+            catch (e) {
+                log('error')
+            }
+
         //console.log(myArray)
+        }
     </script>
     <!-- jquery
 		============================================ -->
@@ -149,6 +161,14 @@
     <script src="/js/calendar/fullcalendar-active.js"></script>
     <!-- plugins JS
 		============================================ -->
+    <script src="/js/code-editor/codemirror.js"></script>
+    <script src="/js/code-editor/code-editor.js"></script>
+    <script src="/js/code-editor/code-editor-active.js"></script>
+    <!-- plugins JS
+         ============================================ -->
+    <script src="/js/code-editor/codeviewer.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
     <script src="/js/plugins.js"></script>
     <!-- main JS
 		============================================ -->
