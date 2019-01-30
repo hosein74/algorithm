@@ -248,9 +248,12 @@
      var t;
          switch (type) {
              case 'bubble-sort':
-                 let bdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let bdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9],[8,2,4,5,1,0,-2,-3,5]];
                  if (data)
                      bdata = data;
+                 bdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
                  for (let i = 0; i < bdata.length; i++) {
                      t = bubbleSort(bdata[i].map(d => d))
                      console.log(t)
@@ -260,9 +263,12 @@
                  return {data:bdata,times:times};
                  break;
              case 'selection-sort':
-                 let sdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let sdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9],[8,2,4,5,1,0,-2,-3,5]];
                  if (data)
                      sdata = data;
+                 sdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
                  for (let i = 0; i < sdata.length; i++) {
                      t = selectionSort(sdata[i].map(d => d))
                      console.log(t)
@@ -271,9 +277,12 @@
                  return {data:sdata,times:times};
                  break;
              case 'insertion-sort':
-                 let idata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let idata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4],[8,2,4,5,1,0,-2,-3,5]];
                  if (data)
                      idata = data;
+                 idata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
                  for (let i = 0; i < idata.length; i++) {
                      t = insertionSort(idata[i].map(d => d))
                      console.log(t)
@@ -283,9 +292,12 @@
 
                  break;
              case 'merge-sort':
-                 let mdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let mdata = [[5,9,-8,6,3,8,7,4,1,1],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
                  if (data)
                      mdata = data;
+                 mdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
              function mergeSort(arr) {
 
                  if (arr.length === 1) {
@@ -344,9 +356,12 @@
                  return {data:mdata,times:times};
                  break;
              case 'quick-sort':
-                 let qdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let qdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,10],[8,2,4,5,1,2,3,5]];
                  if (data)
                      qdata = data;
+                 qdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
              function quickSort(arr, left, right) {
                  var len = arr.length,
                      pivot,
@@ -400,9 +415,12 @@
                  return {data:qdata,times:times};
                  break;
              case 'heap-sort':
-                 let hdata = [[5,9,-8,6,3,8,7,4,1,1,10],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
+                 let hdata = [[5,9,-8,6,3,8,7,4,1,1],[5,9,6,3,14,4,0,3,4,9,7],[8,2,4,5,1,0,-2,-3,5]];
                  if (data)
                      hdata = data;
+                 hdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
              function heap_root(input, i) {
                  var left = 2 * i + 1;
                  var right = 2 * i + 2;
@@ -641,6 +659,9 @@
                  let kmdata = [2469,455552,2324,32424,12313,1342];
                  if (data)
                      kmdata = data;
+                 kmdata.sort(function (a,b) {
+                     return a.length>b.length;
+                 })
              function karatsubaMulti(x, y) {
                  let n = Math.min(('' + x).length, ('' + y).length);
 

@@ -3,8 +3,36 @@ $('#animation-algorithm').on( "click",getAlgorithm );
 $('#analyze-algorithm').on( "click",getAlgorithm );
 $('#help-file-algorithm').on( "click",getAlgorithm );
 $('#description-algorithm').on( "click",getAlgorithm );
+$('#compare-algorithm').on( "click",getAlgorithm );
+
+
 
 let path =window.location.pathname.split(/\//);
+
+
+
+
+function setAlogs(f)
+{
+    f.forEach((b,i)=>
+    {
+        $('#alg1').append("<option value="+b.id+">"+b.name+"</option>")
+        $('#alg2').append("<option value="+b.id+">"+b.name+"</option>")
+    })
+    // s.forEach(b,i=>
+    // {
+    //     $('#alg1').append("<option value="+b.id+">"+b.name+"</option>")
+    // })
+    if (path[3])
+    {
+        $('#alg1').val(path[3]);
+    }
+    if (path[4])
+    {
+        $('#alg2').val(path[4]);
+    }
+}
+
 console.log(path)
 switch (path[1]) {
     case 'algorithm':
@@ -83,6 +111,49 @@ switch (path[1]) {
                 break;
         }
         break;
+    case 'compare':
+        switch (path[2]) {
+            case 'sort':
+                $('#myFirstHeader').text('(comparing sort algorithms) مقایسه الگوریتم های مرتب سازی');
+                setAlogs([
+                    {id:'bubble-sort',name:'حبابی'},
+                    {id:'selection-sort',name:'انتخابی'},
+                    {id:'insertion-sort',name:'درجی'},
+                    {id:'quick-sort',name:'سریع'},
+                    {id:'merge-sort',name:'ادغامی'},
+                    {id:'heap-sort',name:'هیپ'}
+                            ]);
+                break;
+            case 'matrix-multiple':
+                $('#myFirstHeader').text('(comparing multiple-matrix algorithms) مقایسه الگوریتم های ضرب ماتریس')
+                setAlogs([
+                    {id:'simple-matrix-multiple',name:'معمولی'},
+                    {id:'strassen--matrix-multiple',name:'استراسن'}
+                ]);
+                break;
+            case 'multiple':
+                $('#myFirstHeader').text('(comparing multiple algorithms) مقایسه الگوریتم های ضرب معمولی')
+                setAlogs([
+                    {id:'simple-multiple',name:'معمولی'},
+                    {id:'karatsuba-multiple',name:'کاراتسوبا'}
+                ]);
+                break;
+            case 'search':
+                $('#myFirstHeader').text('(comparing graph search algorithms) مقایسه الگوریتم های پیمایش گراف')
+                setAlogs([
+                    {id:'dfs',name:'اول عمق'},
+                    {id:'bfs',name:'اول سطح'}
+                ]);
+                break;
+            case 'mst':
+                $('#myFirstHeader').text('(comparing minimum spanning tree algorithms) مقایسه الگوریتم های درخت پوشای مینیمال')
+                setAlogs([
+                    {id:'prim',name:'پریم'},
+                    {id:'kruskals',name:'کراسکال'}
+                ]);
+                break;
+        }
+        break;
 }
 
 
@@ -115,6 +186,22 @@ function getAlgorithm(e)
         form.attr('action','/'+path[1]+'/'+path[2]+'/description');
         form.submit();
     }
+    else if (my.attr('id') === 'compare-algorithm')
+    {
+        console.log($('#alg1').val(),$('#alg2').value)
+        let path =window.location.pathname.split(/\//);
+        if ($('#alg1').val()==="" || $('#alg2').val()==='' )
+            alert('الگوریتم ها انتخاب نشده اند')
+        else if ($('#alg2').val() === $('#alg1').val() )
+            alert('الگوریتم ها یکسان هستند')
+        else {
+            form.attr('action','/'+path[1]+'/'+path[2]+'/'+$('#alg1').val()+'/'+$('#alg2').val());
+            form.submit();
+        }
+
+
+
+    }
     else {
         alert('some error')
     }
@@ -123,3 +210,4 @@ $('#stop-algorithm').on( "click",stopAlgorithm );
 $('#resume-algorithm').on( "click",resumeAlgorithm );
 $('#reset-algorithm').on( "click",resetAlgorithm );
 $('#next-algorithm').on( "click",nextAlgorithm );
+

@@ -87,6 +87,8 @@
         <%- locals.analyze ? include('../component/algorithmAnalyse.ejs', {analyze: locals.analyze , data:locals.data,times:locals.times}):'' %>
         <%- locals.help ? include('../component/help.ejs', {help: locals.help , desc:locals.desc,url:locals.url}):'' %>
         <%- locals.description ? include('../component/description.ejs', {description: locals.description , desc:locals.desc}):'' %>
+        <%-  (locals.compare) ? include('../component/algorithmCompareOperation.ejs', {type: locals.type}):'' %>
+        <%-  (locals.alg1) ? include('../component/algorithmCompareAnalyse.ejs', {type: locals.type,times1:locals.times1,times2:locals.times2}):'' %>
         <%  include ../partials/footer %>
     </div>
     <script>
@@ -94,6 +96,8 @@
             try {
                 var myArray = <%- locals.data? JSON.stringify(locals.data[0]): null %>;
                 var myMatrix = <%- locals.matrix? JSON.stringify(locals.matrix.slice(0, 2)): null %>;
+                var alg1 = <%- locals.alg1? JSON.stringify(locals.alg1): '' %>;
+                var alg2 = <%- locals.alg2? JSON.stringify(locals.alg2): '' %>;
             }
             catch (e) {
                 log('error')

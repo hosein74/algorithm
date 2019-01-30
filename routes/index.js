@@ -124,6 +124,75 @@ router.post('/algorithm/:name/:operations',files.single('file'), function(req, r
 
 });
 
+router.get('/compare/:type',function(req, res, next) {
+       // var desc = descriptionAlgorithm(req.params.name);
+        res.render('pages/index', { type : req.params.type ,compare:true });
+});
+
+router.post('/compare/:type/:alg1/:alg2',files.single('file'), function(req, res, next) {
+    if (req.file)
+    {
+        var flag = 0;
+        var matrix=[],mat=[];
+        var array=[];
+        var line=[];
+        var lineReader = readline.createInterface({
+            input: fs.createReadStream('files/'+req.file.filename)
+        });
+        lineReader.on('line', function (line) {
+            console.log('Line from file:', line);
+            let l = line.split(",").map(String);
+
+            array.push(l)
+
+            if (line === '*') {
+                matrix.push(mat);
+                mat=[];
+            }
+            else
+            {
+                mat.push(l)
+            }
+        });
+        lineReader.on('error', function (err) {
+            console.log('Line from file err:', err);
+            res.status(400).end();
+        });
+        lineReader.on('close', function (line) {
+            console.log(line);
+            console.log('done reading file.');
+            console.log(array);
+            console.log(matrix);
+            fs.unlink(path.join(__dirname + '/../files/'+req.file.filename),err=>
+            {
+                console.log(err)
+            })
+
+                var times1 = analyzeAlgorithm(req.params.alg1,array,matrix);
+                var times2 = analyzeAlgorithm(req.params.alg2,array,matrix);
+                //bubbleSort(array)
+
+                res.render('pages/index', { type : req.params.type,alg1: req.params.alg1,alg2: req.params.alg2, compare: true,  times1 : times1 , times2 :times2});
+                //next();
+
+        });
+    }
+    else
+    {
+
+
+            //var time = bubbleSort([1,8,9,6,8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,-8,-3,5]);
+            var times1 = analyzeAlgorithm(req.params.alg1,null,null);
+            var times2 = analyzeAlgorithm(req.params.alg2,null,null);
+            //let def = defulatData.map(d=>{d.push(d.length); return d})
+
+            res.render('pages/index', { type : req.params.type,alg1: req.params.alg1,alg2: req.params.alg2, compare: true,  times1 : times1 , times2 :times2});
+
+    }
+
+
+});
+
 
 
 module.exports = router;

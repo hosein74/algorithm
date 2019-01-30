@@ -25,33 +25,83 @@
 </div>
 
 
-
+<script src="/js/charts/Chart.js"></script>
 <script language="JavaScript">
-    function displayLineChart(data) {
-        var ctx = document.getElementById("lineChart1").getContext("2d");
-        var options = { };
-        var lineChart = new Chart(ctx).Line(data, options);
-    }
-    var lineChartData =   {
-        labels: <%-locals.data? JSON.stringify(locals.data): [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>,
-        datasets: [
-            {
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#336e51",
-                pointHighlightFill: "#336e51",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: <%-locals.times? JSON.stringify(locals.times): [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]%>
-            }
-        ],
+
+    var ctx = document.getElementById("lineChart1");
+    var basiclinechart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <%-locals.data? JSON.stringify(locals.data):[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>,
+            datasets: [{
+                label: 'الگوریتم',
+                fill: false,
+                backgroundColor: '#006DF0',
+                borderColor: '#006DF0',
+                data:  <%-locals.times? JSON.stringify(locals.times): [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]%>,
+                yAxisID: "y-axis-1"
+            }]
+        },
         options: {
-
+            responsive: true,
+            //  stacked: false,
+            title:{
+                display:true,
+                text:'نمودار زمانی الگوریتم'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'داده ها'
+                    }
+                }],
+                yAxes: [{
+                    type: "linear",
+                    display: true,
+                    position: "left",
+                    id: "y-axis-1",
+                }],
+            }
         }
-    }
+    });
 
-    displayLineChart(lineChartData);
+
+    <!--function displayLineChart(data) {-->
+    <!--var ctx = document.getElementById("lineChart").getContext("2d");-->
+    <!--var options = { };-->
+    <!--var lineChart = new Chart(ctx).Line(data, options);-->
+    <!--}-->
+    <!--var lineChartData =   {-->
+    <!--labels: <%-locals.data? JSON.stringify(locals.data):[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>,-->
+    <!--datasets: [-->
+    <!--{-->
+    <!--fillColor: "rgba(151,187,205,0.2)",-->
+    <!--strokeColor: "rgba(151,187,205,1)",-->
+    <!--pointColor: "rgba(151,187,205,1)",-->
+    <!--pointStrokeColor: "#336e51",-->
+    <!--pointHighlightFill: "#336e51",-->
+    <!--pointHighlightStroke: "rgba(151,187,205,1)",-->
+    <!--data: <%-locals.times? JSON.stringify(locals.times): [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]%>-->
+    <!--}-->
+    <!--],-->
+    <!--options: {-->
+
+    <!--}-->
+    <!--}-->
+
+    <!--displayLineChart(lineChartData);-->
 
 </script>
+
+
 
 
