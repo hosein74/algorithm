@@ -167,6 +167,8 @@ router.post('/compare/:type/:alg1/:alg2',files.single('file'), function(req, res
             {
                 console.log(err)
             })
+                var desc1 = descriptionAlgorithm(req.params.alg1);
+                var desc2 = descriptionAlgorithm(req.params.alg2);
 
                 var times1 = analyzeAlgorithm(req.params.alg1,array,matrix);
                 var times2 = analyzeAlgorithm(req.params.alg2,array,matrix);
@@ -180,13 +182,15 @@ router.post('/compare/:type/:alg1/:alg2',files.single('file'), function(req, res
     else
     {
 
+        var desc1 = descriptionAlgorithm(req.params.alg1);
+        var desc2 = descriptionAlgorithm(req.params.alg2);
 
             //var time = bubbleSort([1,8,9,6,8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,9, 6, 20, -9, -6, 8,-8,-3,5]);
             var times1 = analyzeAlgorithm(req.params.alg1,null,null);
             var times2 = analyzeAlgorithm(req.params.alg2,null,null);
             //let def = defulatData.map(d=>{d.push(d.length); return d})
 
-            res.render('pages/index', { type : req.params.type,alg1: req.params.alg1,alg2: req.params.alg2, compare: true,  times1 : times1 , times2 :times2});
+            res.render('pages/index', { O1:desc1.O,O2:desc2.O, type : req.params.type,alg1: req.params.alg1,alg2: req.params.alg2, compare: true,  times1 : times1 , times2 :times2});
 
     }
 
