@@ -116,6 +116,17 @@ svg1.append('line').attr('x1',function () {return x(0)})
 
 
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('اعدا محاسباتی',mainColor);
+setHelp('اعداد ',selectColor);
+setHelp('اتنخاب بری عمل ضرب',swapColor);
+setHelp('حاصل نهایی',finalorder);
+
+
 function emptyLine(i) {
   d3.selectAll('.num'+i).text(' ');
 }

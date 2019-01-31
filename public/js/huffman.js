@@ -296,6 +296,15 @@ var counter1 = 0;
 var treeData1 = {};
 /////////////////////////////////////////////////////////////////
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('درخت ایجاد شده توسط هافمن که از برگ ها شروع به ساخته شدن می شود','');
+setHelp('ابتدا با توجه به تعداد هر کاراکتر موجود  برگ ایجاد شده و تعداد آن کنار آن نوشته می شود و مطابق روند ایجاد درخت ایجاد می شود','');
+
+
 //////////////////////////////////////////////////////////
 // var g2 = svg.append("g")
 // rects = g2

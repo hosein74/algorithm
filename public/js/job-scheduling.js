@@ -80,6 +80,16 @@ var svg = d3.select("#algorithm-box").append("svg")
     .append("g").attr('transform','translate('+((mywidth-width)/2)+','+20+')');
 ////////////////////////////////////////////////////////////////////////////
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب و قرار گیری در آرایه زمانی',finalorder);
+setHelp('پیمایش',swapColor);
+
+
 //////////////////////////////////////
 //
 // var margin = {top: 20, right: 90, bottom: 30, left: 90},

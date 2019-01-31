@@ -7,12 +7,34 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class  ="breadcome-heading">
-                                <div class="btn-group active-hook">
+                                <div class="btn-group active-hook  ">
                                     <button class="btn btn-default" id="stop-algorithm"><i class="fa fa-stop"></i> توقف</button>
                                     <button class="btn btn-default" id="resume-algorithm"><i class="fa fa-play"></i> شروع</button>
                                     <button class="btn btn-default" id="reset-algorithm"><i class="fa fa-repeat"></i>برگشت به حالت اول</button>
                                     <button class="btn btn-default" id="next-algorithm"><i class="fa fa-forward"></i>مرحله بعدی</button>
+                                     <a class="btn btn-default Primary mg-b-10" href="#" data-toggle="modal" data-target="#PrimaryModalalert" style="color: inherit"><i class="fa fa-question"></i>راهنمای انیمیشن</a>
+
                                 </div>
+                                <div id="PrimaryModalalert" class="modal modal-edu-general default-popup-PrimaryModal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-close-area modal-close-df">
+                                                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                            </div>
+                                            <div class="modal-body">
+                                                <i class="fa fa-question modal-check-pro"></i>
+                                                <h2>راهنما</h2>
+                                                <div id="helpColor" style="text-align: end">
+                                                <!--    <div><p style="display: inline-block">جابجایی</p><div style="background-color: #0B792F;width: 100px;height: 100px; display: inline-block"></div></div>
+                                               --> </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a data-dismiss="modal" href="#">بستن</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">                                <div id="algorithm-box" class="col-md-12"></div>
                                 </div>
                             </div>

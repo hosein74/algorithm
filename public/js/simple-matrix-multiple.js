@@ -105,6 +105,16 @@ var g2 = svg1.append("g").attr('transform','translate('+(0)+','+50+')');
 
 g2.append('text').attr('transform','translate('+x(myMatrix[0][0].length +myMatrix[1][0].length +7)+','+0+')').text('').attr('id','text').attr('fill',mainColor).style('font-weight','bold');
 
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('اعداد ماتریس',mainColor);
+setHelp('اتنخاب سطر و ستون ضربی',finalorder);
+setHelp('انجام عمل ضرب',selected);
+
 ////////////////////////////////mat1///////////////////////////
 var mat1 = svg.append("g").attr('transform','translate(0,'+margin1+')')
 mat1.append('line').attr('x1',function () {return x(0)})

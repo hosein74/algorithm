@@ -43,6 +43,18 @@ var y = d3.scaleLinear()
     .domain([0,maxHeight])
     .range([0, middle -20]);
 
+
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب',selectColor);
+setHelp('جابجایی',swapColor);
+
+
 var svg = d3.select("#algorithm-box").append("svg")
     .attr("width", '100%' )
     .attr("height", height ) .style('display','block')
@@ -76,6 +88,8 @@ labels.attr("id", function(d,i) {return "text" + i})
         return "translate(" + ((barWidth/2)-5+(x(i))) + ","+(middle-(y(d))-1)+")"
     })
     .html(function(d) {return d;})
+
+
 
 
 function *insertion() {

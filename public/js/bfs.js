@@ -127,6 +127,16 @@ var g = svg.append("g")
 
 var g1 = svg.append("g")
     .attr('transform','translate('+0+','+250+')');
+
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('ویزیت شدن',"#22ff1a");
+setHelp('یالی که از طریق آن نود ویزیت می شود',"#7170ff");
+
 ////////////////////////////////////////////////////////////////////////////
     width1 = +g1.attr("width"),
     height1 = +g1.attr("height");

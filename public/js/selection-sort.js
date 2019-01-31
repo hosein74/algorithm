@@ -77,6 +77,15 @@ labels.attr("id", function(d,i) {return "text" + i})
     .html(function(d) {return d;})
 
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب',selectColor);
+setHelp('پیمایش برای انتخاب عنصر مناسب',selectorder);
+
 
 function *selection() {
     var N = myArray.length;

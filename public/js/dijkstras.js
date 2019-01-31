@@ -137,6 +137,18 @@ for(i =0 ;i<data.nodes.length;i++){
 }
 
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('در حال اجرای عملیات',"#22ff1a");
+setHelp('یالی که از طریق آن نود مشاهده می شود',"#7170ff");
+setHelp('اتمام کار با نود مربوطه',"#ffa46c");
+setHelp('نشان دهنده عدد مسیر نود',mainR2Color);
+
+
+
 
 var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody().strength(-500))

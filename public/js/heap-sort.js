@@ -105,6 +105,17 @@ rects.append("text")
 
 
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب',selectColor);
+setHelp('جابجایی',swapColor);
+setHelp('پیمایش در درخت هیپ برای انجام عمل هیپیفای',selectorder);
+setHelp('درایه ای که از سر هیپ برداشته شده و مرتب میشود',finalorder);
+
 ////////////////////////////////////////////
 
 

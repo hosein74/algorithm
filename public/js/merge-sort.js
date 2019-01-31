@@ -53,6 +53,17 @@ var svg = d3.select("#algorithm-box").append("svg")
     .style('display','block')
     .style('margin','auto')
     .append("g").attr('transform','translate('+((mywidth-width)/2)+',0)');
+
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب برای انتقال به آرایه ادغامی از از دو آرایه',selectColor);
+setHelp('انتخاب عنصر آرایه برای پیمایش در دو آرایه برای مرج کردن دو آرایه مرتب',selectorder);
+
 /*************************************** rect *************************************/
 var g1 = svg.append("g")
     rects = g1
@@ -79,6 +90,8 @@ rects.append("text")
     })
     .style('font-size',fontSize)
     .html(function(d) {return d;})
+
+
 
 /*************************************** rect *************************************/
 /*************************************** lable *************************************/

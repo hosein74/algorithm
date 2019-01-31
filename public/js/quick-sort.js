@@ -78,6 +78,17 @@ labels.attr("id", function(d,i) {return "text" + i})
     .html(function(d) {return d;})
 
 
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب',selectColor);
+setHelp('محدوده انتخاب شده برای انجام عمل بازگشتی تابع روی آن',selectorder);
+setHelp('pivote',selected);
+
+
 function *quickSort(arr, left, right){
     var len = arr.length,
         pivot,

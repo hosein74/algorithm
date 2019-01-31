@@ -19,6 +19,8 @@ var stop = false;
 var steps = 0;
 var bogoShuffles = 0;
 
+
+
 /******array calculate******/
 function myCompare(a,b) {
     if (a.end > b.end)
@@ -88,6 +90,14 @@ svg.append("g")
 // var margin = {top: 20, right: 90, bottom: 30, left: 90},
 //     width = 960 - margin.left - margin.right,
 //     height = 500 - margin.top - margin.bottom;
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('انتخاب شدن',finalorder);
+setHelp('عدم انتخاب',selectColor);
 
 
 /// ///////////////////////////////////////////////////////

@@ -41,6 +41,7 @@ var y = d3.scaleLinear()
     .domain([0,maxHeight])
     .range([0, middle -20]);
 
+
 var svg = d3.select("#algorithm-box").append("svg")
     .attr("width", '100%' )
     .attr("height", height ) .style('display','block')
@@ -51,6 +52,19 @@ var rects = svg.append("g")
     .selectAll("rect")
     .data(myArray)
     .enter().append("rect")
+
+
+
+function setHelp(text,color)
+{
+    $('#helpColor').append("<div style='margin-top: 5px ;'><p style=\"display: inline-block; \">"+text+"</p><div style=\"margin-left:10px; margin-bottom:"+(-mywidth/150)+"px;background-color: "+color+";width: "+mywidth/50+"px;height: "+mywidth/50+"px;border-radius: 50%; display: inline-block\"></div></div>\n")
+}
+
+setHelp('رنگ اصلی',mainColor);
+setHelp('انتخاب',selectColor);
+setHelp('جابجایی',swapColor);
+
+
 
 rects.attr("id", function(d,i) {return "rect" + i})
     .attr("rx", 6)
